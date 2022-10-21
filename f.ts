@@ -82,10 +82,10 @@ async function saveJsontoXml(jsondata: any, filename: string): Promise<number> {
     const builder = new Builder()
     const xml = builder.buildObject(jsondata)
     writeFile(filename, xml, (err) => {
-      if (!err) {
-        resolve(0)
+      if (err) {
+        throw new Error('write file error')
       }
-      reject(1)
+      resolve(0)
     })
   })
 }
