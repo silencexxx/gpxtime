@@ -54,8 +54,8 @@ function prepend(jsondata, nsec: number) {
   const firstEl = jsondata.gpx.trk[0].trkseg[0].trkpt[0]
   const firstDate = (' ' + firstEl.time[0]).slice(1)
   const newTime = reversetime(firstDate, 1)
-  const newEl = {...firstEl}
-  newEl.time[0] = newTime
+  const newEl = {...firstEl} /* new reference to the same objects */
+  newEl.time = [newTime]    /* the time refers to a new object */
 
   const l: [any] = jsondata.gpx.trk[0].trkseg[0].trkpt
   jsondata.gpx.trk[0].trkseg[0].trkpt = [newEl, ...jsondata.gpx.trk[0].trkseg[0].trkpt]
