@@ -59,16 +59,15 @@ function getfirsttrkpt(jsondata) {
 }
 
 function prepend(jsondata, nsec: number) {
-  const firstEl = jsondata.gpx.trk[0].trkseg[0].trkpt[0]
-  const firstDate = (' ' + firstEl.time[0]).slice(1) /* clone string */
+  const firstEl: Itrkpt = jsondata.gpx.trk[0].trkseg[0].trkpt[0] as Itrkpt
+  const firstDate: string = (' ' + firstEl.time[0]).slice(1) /* clone string */
 
-  const addUs = Array.from(Array(nsec).keys()).map((i) => {
-    const newTime = reversetime(firstDate, i + 1)
-    const newEl = { ...firstEl } /* new reference to the same objects */
+  const addUs: Itrkpt[] = Array.from(Array(nsec).keys()).map((i) => {
+    const newTime: string = reversetime(firstDate, i + 1)
+    const newEl: Itrkpt = { ...firstEl } /* new reference to the same objects */
     newEl.time = [newTime]    /* the time refers to a new object */
-
+ 
     return newEl
-
   }).reverse() /* reverse since the time is in reverse order */
 
   jsondata.gpx.trk[0].trkseg[0].trkpt = [...addUs, ...jsondata.gpx.trk[0].trkseg[0].trkpt] /* add the new object to the begining */

@@ -7,7 +7,7 @@ import {
 
 const [inputfile, nSec, outputfile] = argv.slice(2)
 
-console.log('---moveit---');
+console.log('---moveit---')
 
 const prependCall = (n: number) => (j) => prepend(j, n)
 const saveJsontoXmlCall = (fn: string) => (data) => saveJsontoXml(data, fn)
