@@ -58,7 +58,7 @@ function getfirsttrkpt(jsondata) {
   return ret
 }
 
-function prepend(jsondata, nsec: number) {
+function prependsec(jsondata, nsec: number) {
   const firstEl: Itrkpt = jsondata.gpx.trk[0].trkseg[0].trkpt[0] as Itrkpt
   const firstDate: string = (' ' + firstEl.time[0]).slice(1) /* clone string */
 
@@ -89,12 +89,20 @@ async function saveJsontoXml(jsondata: any, filename: string): Promise<number> {
   })
 }
 
+function removesec(jsondata, nsec: number) {
+
+  jsondata.gpx.trk[0].trkseg[0].trkpt = [...jsondata.gpx.trk[0].trkseg[0].trkpt.slice(nsec)] /* remove some blocks */
+
+  return jsondata
+}
+
 export {
   reversetime,
   trimISOString,
   xml2json,
   getfirsttrkpt,
-  prepend,
-  saveJsontoXml
+  prependsec,
+  saveJsontoXml,
+  removesec
 }
 

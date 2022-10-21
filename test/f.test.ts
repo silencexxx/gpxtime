@@ -3,8 +3,9 @@ import {
   reversetime,
   trimISOString,
   xml2json,
-  prepend,
-  saveJsontoXml
+  prependsec,
+  saveJsontoXml,
+  removesec
 } from '../f'
 //import { assert } from 'assert'
 import assert = require('assert');
@@ -60,7 +61,7 @@ describe('f', function () {
 
       const ret = await xml2json('test\\Evening_Ride.gpx') as any
       assert.strictEqual(ret.gpx.trk[0].trkseg[0].trkpt.length, 3)
-      const o = prepend(ret, 2)
+      const o = prependsec(ret, 2)
       assert.strictEqual(o.gpx.trk[0].trkseg[0].trkpt.length, 5)
     });
 
@@ -80,5 +81,14 @@ describe('f', function () {
       assert.strictEqual(ret, 0)
 
     });
+
+    it('removesec', async function () {
+
+      const ret = await xml2json('test\\Evening_Ride.gpx') as any
+      assert.strictEqual(ret.gpx.trk[0].trkseg[0].trkpt.length, 3)
+      const o = removesec(ret, 2)
+      assert.strictEqual(o.gpx.trk[0].trkseg[0].trkpt.length, 1)
+    });
+
   });
 });
