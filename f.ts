@@ -57,8 +57,7 @@ function prepend(jsondata, nsec: number) {
   const newEl = {...firstEl} /* new reference to the same objects */
   newEl.time = [newTime]    /* the time refers to a new object */
 
-  const l: [any] = jsondata.gpx.trk[0].trkseg[0].trkpt
-  jsondata.gpx.trk[0].trkseg[0].trkpt = [newEl, ...jsondata.gpx.trk[0].trkseg[0].trkpt]
+  jsondata.gpx.trk[0].trkseg[0].trkpt = [newEl, ...jsondata.gpx.trk[0].trkseg[0].trkpt] /* add the new object to the begining */
   return jsondata
 }
 
