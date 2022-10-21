@@ -57,18 +57,10 @@ describe('f', function () {
 
     it('prepend', async function () {
 
-      try {
-        const ret = await xml2json('test\\Evening_Ride.gpx') as any
-        assert.strictEqual(ret.gpx.trk[0].trkseg[0].trkpt.length, 3)
-        const o = prepend(ret, 2)
-        assert.strictEqual(o.gpx.trk[0].trkseg[0].trkpt.length, 5)
-        
-      }
-      catch (err) {
-        assert.fail('expetion is failure')
-      }
-
+      const ret = await xml2json('test\\Evening_Ride.gpx') as any
+      assert.strictEqual(ret.gpx.trk[0].trkseg[0].trkpt.length, 3)
+      const o = prepend(ret, 2)
+      assert.strictEqual(o.gpx.trk[0].trkseg[0].trkpt.length, 5)
     });
-
   });
 });
