@@ -3,7 +3,8 @@ import {
   reversetime,
   trimISOString,
   xml2json,
-  prepend
+  prepend,
+  saveJsontoXml
 } from '../f'
 //import { assert } from 'assert'
 import assert = require('assert');
@@ -61,6 +62,23 @@ describe('f', function () {
       assert.strictEqual(ret.gpx.trk[0].trkseg[0].trkpt.length, 3)
       const o = prepend(ret, 2)
       assert.strictEqual(o.gpx.trk[0].trkseg[0].trkpt.length, 5)
+    });
+
+    it('savexml', async function () {
+
+      type t = {
+        a: string;
+        b: number;
+      }
+
+      const o: t = {
+        a: 'test',
+        b: 99
+      }
+
+      const ret = await saveJsontoXml(o, 'test_out.xml')
+      assert.strictEqual(ret, 0)
+
     });
   });
 });

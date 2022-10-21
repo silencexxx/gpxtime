@@ -1,5 +1,13 @@
-import { readFile } from 'fs'
-import { parseString } from 'xml2js'
+import {
+  readFile,
+  writeFile
+} from 'fs'
+
+import {
+  parseString,
+  Builder
+} from 'xml2js'
+
 import { Itrkpt } from './Itrkpt'
 
 /**
@@ -61,15 +69,25 @@ function prepend(jsondata, nsec: number) {
 
     return newEl
 
-  }).reverse()
+  }).reverse() /* reverse since the time is in reverse order */
 
   jsondata.gpx.trk[0].trkseg[0].trkpt = [...addUs, ...jsondata.gpx.trk[0].trkseg[0].trkpt] /* add the new object to the begining */
 
   return jsondata
 }
 
-function saveJsontoXml(jsondata: string, filename: string) {
+async function saveJsontoXml(jsondata: any, filename: string): Promise<number> {
 
+  return new Promise<number>((resolve, reject) => {
+    const builder = new Builder()
+    const xml = builder.buildObject(jsondata)
+    writeFile(filename, xml, (err) => {
+      if (!err) {
+        resolve(0)
+      }
+      reject(1)
+    })
+  })
 }
 
 export {
@@ -77,6 +95,7 @@ export {
   trimISOString,
   xml2json,
   getfirsttrkpt,
-  prepend
+  prepend,
+  saveJsontoXml
 }
 
