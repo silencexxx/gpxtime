@@ -13,10 +13,11 @@
     <EnableTypeScript>true</EnableTypeScript>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <StartWebBrowser>True</StartWebBrowser>
+    <StartWebBrowser>False</StartWebBrowser>
     <JavaScriptTestRoot>test</JavaScriptTestRoot>
     <JavaScriptTestFramework>mocha</JavaScriptTestFramework>
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <ScriptArguments>test\evening_ride.gpx 3 test\er_out.xml</ScriptArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
