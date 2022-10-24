@@ -71,12 +71,19 @@ function prependsec(jsondata, nsec: number) {
                                               * the string - so dont modify this */
 
   const addUs: Itrkpt[] = Array.from(Array(nsec).keys()).map((i) => {
-    const newTime: string = reversetime(firstDate, i + 1)
+
+    /* nsec - i = the number of seconds in
+     * reverse order.
+     * the _last_ will be "1".
+     * so you dont need to reverse the array
+     * */
+
+    const newTime: string = reversetime(firstDate, nsec - i)
     const newEl: Itrkpt = { ...firstEl } /* new reference to the same objects */
     newEl.time = [newTime]    /* the time refers to a new object */
  
     return newEl
-  }).reverse() /* reverse since the time is in reverse order */
+  })
 
   jsondata.gpx.trk[0].trkseg[0].trkpt = [...addUs, ...jsondata.gpx.trk[0].trkseg[0].trkpt] /* add the new object to the begining */
 
