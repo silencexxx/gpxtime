@@ -10,24 +10,21 @@ import {
 
 import { Itrkpt } from './Itrkpt'
 
-type tz = Uppercase<'z'>
-const z: tz = 'Z'
-
 /**
  * remove the milisec-part of iso-string
  * @param datestring
  */
 function trimISOString(datestring: string) {
-  const m = datestring.match(`^(.*)\\.0*${z}$`)
+  const m = datestring.match(/^(.*)\.0*Z$/)
   if (m) {
-    return `${m[1]}${z}`
+    return `${m[1]}Z`
   }
   return datestring
 }
 
 /**
- * the datestring will not be modified here - a 
- * new string will be constructed and returned
+ * the datestring will not be modified here - but a 
+ * new string will be constructed
  * @param datestring
  * @param sec
  */
