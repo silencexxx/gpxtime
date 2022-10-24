@@ -7,7 +7,7 @@ import {
   saveJsontoXml,
   removesec
 } from '../f'
-//import { assert } from 'assert'
+
 import assert = require('assert');
 import { Itrkpt } from '../Itrkpt';
 
