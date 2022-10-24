@@ -10,7 +10,8 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "test": "node .\\node_modules\\mocha\\bin\\mocha.js test",
-    "t": "npm run build && npm run test"
+    "t": "npm run build && npm run test",
+    "version": "tsc --version"
   },
   "devDependencies": {
     "@types/node": "^14.14.7",
