@@ -22,6 +22,12 @@ function trimISOString(datestring: string) {
   return datestring
 }
 
+/**
+ * the datestring will not be modified here - but a 
+ * new string will be constructed
+ * @param datestring
+ * @param sec
+ */
 function reversetime(datestring: string, sec: number) {
   const d = new Date(datestring)
   const milsec = d.getTime()
@@ -60,7 +66,9 @@ function getfirsttrkpt(jsondata) {
 
 function prependsec(jsondata, nsec: number) {
   const firstEl: Itrkpt = jsondata.gpx.trk[0].trkseg[0].trkpt[0] as Itrkpt
-  const firstDate: string = (' ' + firstEl.time[0]).slice(1) /* clone string */
+
+  const firstDate: string = firstEl.time[0] /* note that this is a reference to 
+                                              * the string - so dont modify this */
 
   const addUs: Itrkpt[] = Array.from(Array(nsec).keys()).map((i) => {
     const newTime: string = reversetime(firstDate, i + 1)

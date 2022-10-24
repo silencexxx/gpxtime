@@ -9,6 +9,7 @@ import {
 } from '../f'
 //import { assert } from 'assert'
 import assert = require('assert');
+import { Itrkpt } from '../Itrkpt';
 
 describe('f', function () {
   describe('#reversetime', function () {
@@ -63,6 +64,25 @@ describe('f', function () {
       assert.strictEqual(ret.gpx.trk[0].trkseg[0].trkpt.length, 3)
       const o = prependsec(ret, 2)
       assert.strictEqual(o.gpx.trk[0].trkseg[0].trkpt.length, 5)
+    });
+
+    it('prepend and verify date', async function () {
+
+      const ret = await xml2json('test\\Evening_Ride.gpx') as any
+      assert.strictEqual(ret.gpx.trk[0].trkseg[0].trkpt.length, 3)
+      const o = prependsec(ret, 2)
+
+      const firstthree = (o.gpx.trk[0].trkseg[0].trkpt.slice(0, 3) as Itrkpt[])
+        .map(x => x.time[0])
+
+      const exp =
+        [
+          '2022-10-19T17:21:33Z',
+          '2022-10-19T17:21:34Z',
+          '2022-10-19T17:21:35Z'
+        ]
+
+      assert.deepStrictEqual(firstthree, exp)
     });
 
     it('savexml', async function () {
