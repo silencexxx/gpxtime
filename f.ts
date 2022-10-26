@@ -15,9 +15,12 @@ import { Itrkpt } from './Itrkpt'
  * @param datestring
  */
 function trimISOString(datestring: string) {
-  const m = datestring.match(/^(.*)\.0*Z$/)
+  type Z = 'Z'
+  const z: Z = 'Z'
+
+  const m = datestring.match(`^(.*)\\.0*${z}$`)
   if (m) {
-    return `${m[1]}Z`
+    return `${m[1]}${z}`
   }
   return datestring
 }
