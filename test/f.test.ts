@@ -94,7 +94,7 @@ describe('f', function () {
 
       const o: t = {
         a: 'test',
-        b: 98
+        b: 55
       }
 
       const ret = await saveJsontoXml(o, 'test\\test_out.xml')
