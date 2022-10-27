@@ -97,7 +97,7 @@ describe('f', function () {
         b: 99
       }
 
-      const ret = await saveJsontoXml(o, 'test_out.xml')
+      const ret = await saveJsontoXml(o, 'test\\test_out.xml')
       assert.strictEqual(ret, 0)
 
     });
