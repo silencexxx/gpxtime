@@ -110,5 +110,13 @@ describe('f', function () {
       assert.strictEqual(o.gpx.trk[0].trkseg[0].trkpt.length, 1)
     });
 
+    it('removesec invalid', async function () {
+
+      const ret = await xml2json('test\\Evening_Ride.gpx') as any
+      assert.strictEqual(ret.gpx.trk[0].trkseg[0].trkpt.length, 3)
+      const o = removesec(ret, -2)
+      assert.strictEqual(o.gpx.trk[0].trkseg[0].trkpt.length, 3)
+    });
+
   });
 });

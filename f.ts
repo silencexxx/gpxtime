@@ -10,6 +10,8 @@ import {
 
 import { Itrkpt } from './Itrkpt'
 
+import { InvalidSecError} from './InvalidSecError'
+
 /**
  * remove the milisec-part of iso-string
  * @param datestring
@@ -107,9 +109,21 @@ async function saveJsontoXml(jsondata: any, filename: string): Promise<number> {
   })
 }
 
+function assertSecValid(n: number) {
+  if (n < 1) {
+    throw new InvalidSecError()
+  }
+}
+
 function removesec(jsondata, nsec: number) {
 
-  jsondata.gpx.trk[0].trkseg[0].trkpt = [...jsondata.gpx.trk[0].trkseg[0].trkpt.slice(nsec)] /* remove some blocks */
+  try {
+    assertSecValid(nsec);
+    jsondata.gpx.trk[0].trkseg[0].trkpt = jsondata.gpx.trk[0].trkseg[0].trkpt.slice(nsec) /* remove some blocks */
+  }
+  catch (err) {
+    //console.log(err)
+  }
 
   return jsondata
 }
