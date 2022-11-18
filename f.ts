@@ -84,7 +84,7 @@ function prependsec(jsondata, nsec: number) {
      * */
 
     const newTime: string = reversetime(firstDate, nsec - i)
-    const newEl: Itrkpt = { ...firstEl } /* new reference to the same objects */
+    const newEl: Itrkpt = { ...firstEl } /* copy object */
     newEl.time = [newTime]    /* the time refers to a new object */
  
     return newEl

@@ -6,7 +6,7 @@ interface ILatLon {
 interface Itrkpt {
   ele: string[];
   time: string[];
-  $: ILatLon;
+  $: ILatLon; /* $ is just the name xml2json uses for xml-attributes! */
 }
 
 export {
