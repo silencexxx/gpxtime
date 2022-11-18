@@ -21,10 +21,8 @@ function trimISOString(datestring: string) {
   const z: Z = 'Z'
 
   const m = datestring.match(`^(.*)\\.0*${z}$`)
-  if (m) {
-    return `${m[1]}${z}`
-  }
-  return datestring
+  
+  return m ? `${m[1]}${z}` : datestring
 }
 
 /**
@@ -75,20 +73,23 @@ function prependsec(jsondata, nsec: number) {
   const firstDate: string = firstEl.time[0] /* note that this is a reference to 
                                               * the string - so dont modify this */
 
-  const addUs: Itrkpt[] = Array.from(Array(nsec).keys()).map((i) => {
+  const mp = function* () {
+    for (let i of Array(nsec).keys()) {
+      /* nsec - i = the number of seconds in
+       * reverse order.
+       * the _last_ will be "1".
+       * so you dont need to reverse the array
+       * */
 
-    /* nsec - i = the number of seconds in
-     * reverse order.
-     * the _last_ will be "1".
-     * so you dont need to reverse the array
-     * */
+      const newTime: string = reversetime(firstDate, nsec - i)
+      const newEl: Itrkpt = { ...firstEl } /* new reference to the same objects */
+      newEl.time = [newTime]    /* the time refers to a new object */
 
-    const newTime: string = reversetime(firstDate, nsec - i)
-    const newEl: Itrkpt = { ...firstEl } /* new reference to the same objects */
-    newEl.time = [newTime]    /* the time refers to a new object */
- 
-    return newEl
-  })
+      yield newEl
+    }
+  }
+
+  const addUs = mp()
 
   jsondata.gpx.trk[0].trkseg[0].trkpt = [...addUs, ...jsondata.gpx.trk[0].trkseg[0].trkpt] /* add the new object to the begining */
 
