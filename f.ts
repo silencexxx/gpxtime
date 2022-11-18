@@ -68,6 +68,7 @@ function getfirsttrkpt(jsondata) {
 }
 
 function prependsec(jsondata, nsec: number) {
+
   const firstEl: Itrkpt = jsondata.gpx.trk[0].trkseg[0].trkpt[0] as Itrkpt
 
   const firstDate: string = firstEl.time[0] /* note that this is a reference to 
