@@ -1,4 +1,4 @@
-/* 4 */
+/* 5 */
 import { argv } from 'process'
 import {
   xml2json,
