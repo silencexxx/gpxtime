@@ -5,6 +5,7 @@ edit online
 4
 7 local
 11111
+def
 */
 
 import {
