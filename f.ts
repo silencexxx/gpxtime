@@ -11,7 +11,6 @@ import {
 import { Itrkpt } from './Itrkpt'
 
 import { InvalidSecError} from './InvalidSecError'
-/* forkfrom xxxxxx */
 /**
  * remove the milisec-part of iso-string
  * @param datestring
